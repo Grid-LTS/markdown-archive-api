@@ -1,0 +1,14 @@
+# compiled output
+/dist
+/tmp
+
+# other dirs
+public
+bin
+
+# dependencies
+/node_modules
+
+# misc
+/.sass-cache
+npm-debug.log*
