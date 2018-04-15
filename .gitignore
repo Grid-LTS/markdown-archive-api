@@ -2,9 +2,10 @@
 /dist
 /tmp
 
-# other dirs
+# other dirs, config
 public
 bin
+markdown_archive.config
 
 # dependencies
 /node_modules
