@@ -9,20 +9,27 @@ function readProperties() {
   return properties;
 }
 
-function listMarkdownFiles(rpath = "") {
-  let root_path = rpath;
-  if (rpath.length === 0) {
-    const config = readProperties();
-    root_path = config.get("main.default_path");
+function listMarkdownFiles(root_path = "") {
+  if (root_path.length !== 0) {
+    return glob.sync("**/*.md", {
+      cwd: root_path,
+      absolute: false
+    });
+  } else {
+    return [];
   }
-  return glob.sync("**/*.md", {
-    cwd: root_path,
-    absolute: false
-  });
+}
+
+function getRootPaths() {
+  const config = readProperties();
+  const root_path = config.get("main.default_path");
+  return root_path;
 }
 
 let list = function(req, res, next) {
-  const response = listMarkdownFiles();
+  let response = { type: "mdlist", data: {} };
+  response.id = getRootPaths();
+  response.data.mdfiles = listMarkdownFiles(response.id);
   res.json(response);
 };
 
