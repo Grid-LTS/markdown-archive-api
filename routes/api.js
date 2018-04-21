@@ -22,17 +22,29 @@ function listMarkdownFiles(root_path = "") {
 
 function getRootPaths() {
   const config = readProperties();
-  const root_path = config.get("main.default_path");
-  return root_path;
+  const root_path_config = config.get("main.default_path");
+  let root_paths = root_path_config.split(",").map(path => {
+    return path.trim();
+  });
+  return root_paths;
 }
 
 let list = function(req, res, next) {
-  let response = { type: "mdlist", data: {} };
-  response.id = getRootPaths();
-  response.data.mdfiles = listMarkdownFiles(response.id);
+  response.id = response.data.mdfiles = listMarkdownFiles(response.id);
+  res.json(response);
+};
+
+let mddirs = function(req, res, next) {
+  let paths = getRootPaths();
+  let response = {};
+  response.data = [];
+  paths.forEach(path => {
+    response.data.push({ id: path, type: "mddir", attributes: { path } });
+  });
   res.json(response);
 };
 
 export default {
-  list
+  list,
+  mddirs
 };

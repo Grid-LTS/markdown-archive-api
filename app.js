@@ -41,7 +41,8 @@ app.use(function(req, res, next) {
 
 // Specify application routes
 app.use("/", indexRouter);
-app.get("/api/mdlists", api.list);
+app.get("/api/list/:path", api.list);
+app.get("/api/mddirs", api.mddirs);
 //app.get('/api/list/:path', api.listpath);
 
 //app.use('/users', usersRouter);
