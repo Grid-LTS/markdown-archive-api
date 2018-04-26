@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
-  console.log("test");
   // Request methods you wish to allow
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -41,8 +40,8 @@ app.use(function(req, res, next) {
 
 // Specify application routes
 app.use("/", indexRouter);
-app.get("/api/list/:path", api.list);
-app.get("/api/mddirs", api.mddirs);
+app.get("/api/mdlists/:root_path", api.list);
+app.get("/api/mdroots", api.mdroots);
 //app.get('/api/list/:path', api.listpath);
 
 //app.use('/users', usersRouter);
