@@ -1,2 +1,5 @@
+# must be copied to markdown_archive.config
+
 [main]
-default_path = /my/default/path
+# write here comma separated the root directories, below which markdown files can be found
+default_path = /my/root/path1, /my/root/path2 
